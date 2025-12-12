@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Robotics Club MNNIT</title><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></head><body><div class="video-container"><video autoplay muted loop id="bg-video"><source src="https://videos.pexels.com/video-files/3129671/3129671-hd_1920_1080_30fps.mp4" type="video/mp4"></video><div class="video-overlay"></div></div>
+<nav>
+    <div class="logo">ROBOTICS CLUB <span class="highlight">MNNIT</span></div>
+    <div class="nav-right">
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></div>
+            </label>
+        </div>
+        <div class="nav-toggle-btn" onclick="toggleNav()">
+            <i class="fas fa-chevron-down" id="navArrow"></i>
+        </div>
+    </div>
+    <div class="nav-overlay" id="navOverlay">
+        <div class="nav-menu">
+            <a href="/">Home</a>
+            <a href="/projects">Projects</a>
+            <a href="/sdc">SDC</a>
+            <a href="/gallery">Gallery</a>
+            <a href="/team">Team</a>
+            <a href="/register" class="highlight-link">Register</a>
+            <a href="/login" class="highlight-link">Team Login</a>
+        </div>
+    </div>
+</nav>
+<main class="sdc-section"><div class="sdc-hero"><h1>PROJECT SDC</h1></div><div class="sdc-content"><div class="sdc-card glass-card wide-card"><img src="https://images.pexels.com/photos/355913/pexels-photo-355913.jpeg?auto=compress&cs=tinysrgb&w=1260" style="width:100%;border-radius:10px;"><h2>SPECS</h2><div id="sdcContent"></div></div></div></main><footer><div class="footer-top-bar"><div class="copyright-text">COPYRIGHT © ROBOTICS CLUB 2025</div></div></footer><script src="/js/script.js"></script><script>fetch('/api/sdc').then(r=>r.json()).then(d=>document.getElementById('sdcContent').innerHTML='<ul class="sdc-specs">'+d.map(i=>`<li><i class="fas ${i.icon}"></i> <strong>${i.title}:</strong> ${i.desc}</li>`).join('')+'</ul>');</script></body></html>

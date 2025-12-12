@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Robotics Club MNNIT</title><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></head><body><div class="video-container"><video autoplay muted loop id="bg-video"><source src="https://videos.pexels.com/video-files/3129671/3129671-hd_1920_1080_30fps.mp4" type="video/mp4"></video><div class="video-overlay"></div></div>
+<nav>
+    <div class="logo">ROBOTICS CLUB <span class="highlight">MNNIT</span></div>
+    <div class="nav-right">
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></div>
+            </label>
+        </div>
+        <div class="nav-toggle-btn" onclick="toggleNav()">
+            <i class="fas fa-chevron-down" id="navArrow"></i>
+        </div>
+    </div>
+    <div class="nav-overlay" id="navOverlay">
+        <div class="nav-menu">
+            <a href="/">Home</a>
+            <a href="/projects">Projects</a>
+            <a href="/sdc">SDC</a>
+            <a href="/gallery">Gallery</a>
+            <a href="/team">Team</a>
+            <a href="/register" class="highlight-link">Register</a>
+            <a href="/login" class="highlight-link">Team Login</a>
+        </div>
+    </div>
+</nav>
+
+<main class="hero-section">
+    <div class="hero-content">
+        <h1 class="glitch-text" data-text="ROBOTICS CLUB MNNIT">ROBOTICS CLUB MNNIT</h1>
+        <p class="sub-text">INNOVATE • BUILD • EVOLVE</p>
+    </div>
+    <div class="navigator-container">
+        <a href="/projects" class="nav-card"><i class="fas fa-project-diagram"></i><span>PROJECTS</span></a>
+        <a href="/sdc" class="nav-card"><i class="fas fa-car"></i><span>SDC</span></a>
+        <a href="/gallery" class="nav-card"><i class="fas fa-images"></i><span>GALLERY</span></a>
+        <a href="/team" class="nav-card"><i class="fas fa-users"></i><span>TEAM</span></a>
+        <a href="/register" class="nav-card highlight-card row-2"><i class="fas fa-user-plus"></i><span>REGISTER</span></a>
+        <a href="/login" class="nav-card highlight-card row-2"><i class="fas fa-sign-in-alt"></i><span>LOGIN</span></a>
+    </div>
+</main>
+<section class="past-events-section"><h2 class="section-title">PAST GLORY</h2><div class="marquee-container"><div class="marquee-track" id="marqueeTrack"></div></div></section>
+<section id="events-section" class="accordion-section"><h2 class="section-title">UPCOMING EVENTS</h2><div class="accordion-container" id="accordionContainer"></div></section>
+<section class="contact-section">
+    <div class="contact-container">
+        <div class="contact-form glass-card">
+            <h2>CONTACT US</h2>
+            <form><div class="input-group"><label>Name</label><input type="text" class="modern-input"></div><div class="input-group"><label>Email</label><input type="email" class="modern-input"></div><div class="input-group"><label>Message</label><textarea class="modern-input" rows="4"></textarea></div><button class="cta-btn">SEND MESSAGE</button></form>
+        </div>
+        <div class="contact-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3601.3684448548236!2d81.86129841094033!3d25.49275587744315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399aca78818ddc51%3A0x6690dd2de3a1415b!2sMotilal%20Nehru%20National%20Institute%20of%20Technology%2C%20Allahabad!5e0!3m2!1sen!2sin!4v1709228892473!5m2!1sen!2sin" width="100%" height="400" style="border:0; border-radius:10px;" allowfullscreen="" loading="lazy"></iframe></div>
+    </div>
+</section>
+<footer><div class="footer-top-bar"><div class="copyright-text">COPYRIGHT © ROBOTICS CLUB 2025</div></div></footer><script src="/js/script.js"></script><script>
+async function loadHome(){
+    const res1 = await fetch('/api/past-glory'); const pg = await res1.json();
+    const track = document.getElementById('marqueeTrack');
+    const pgHtml = pg.map(i => `<div class="past-card"><div class="past-card-image" style="background-image: url('${i.image}')"></div><div class="past-card-content"><h3>${i.title}</h3></div></div>`).join('');
+    track.innerHTML = pgHtml + pgHtml;
+
+    const res2 = await fetch('/api/events'); const up = await res2.json();
+    document.getElementById('accordionContainer').innerHTML = up.map((e,i)=>`
+        <div class="acc-card ${i===0?'active':''}" style="background-image:url('${e.image}')">
+            <div class="acc-overlay"></div>
+            <div class="acc-collapsed"><div class="plus-icon"><i class="fas fa-plus"></i></div><div class="vertical-text">${e.title}</div></div>
+            <div class="acc-expanded">
+                <div class="prize-badge">PRIZES WORTH: ${e.prize}</div>
+                <h3>${e.title}</h3>
+                <p class="desc">${e.desc}</p>
+                <a href="/register" class="acc-btn-solid">REGISTER NOW</a>
+            </div>
+        </div>`).join('');
+    document.querySelectorAll('.acc-card').forEach(c => { c.addEventListener('click', () => { document.querySelectorAll('.acc-card').forEach(x => x.classList.remove('active')); c.classList.add('active'); }); });
+}
+loadHome();
+</script></body></html>

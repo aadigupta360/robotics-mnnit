@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Robotics Club MNNIT</title><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></head><body><div class="video-container"><video autoplay muted loop id="bg-video"><source src="https://videos.pexels.com/video-files/3129671/3129671-hd_1920_1080_30fps.mp4" type="video/mp4"></video><div class="video-overlay"></div></div>
+<nav>
+    <div class="logo">ROBOTICS CLUB <span class="highlight">MNNIT</span></div>
+    <div class="nav-right">
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></div>
+            </label>
+        </div>
+        <div class="nav-toggle-btn" onclick="toggleNav()">
+            <i class="fas fa-chevron-down" id="navArrow"></i>
+        </div>
+    </div>
+    <div class="nav-overlay" id="navOverlay">
+        <div class="nav-menu">
+            <a href="/">Home</a>
+            <a href="/projects">Projects</a>
+            <a href="/sdc">SDC</a>
+            <a href="/gallery">Gallery</a>
+            <a href="/team">Team</a>
+            <a href="/register" class="highlight-link">Register</a>
+            <a href="/login" class="highlight-link">Team Login</a>
+        </div>
+    </div>
+</nav>
+
+<main class="form-section">
+    <div class="glass-card wide-card">
+        <div class="auth-toggle-container">
+            <button class="auth-toggle-btn active" onclick="switchReg('create')">CREATE TEAM</button>
+            <button class="auth-toggle-btn" onclick="switchReg('join')">JOIN TEAM</button>
+        </div>
+
+        <h2 id="regTitle" style="margin-top:20px; color: var(--accent-color);">CREATE NEW TEAM</h2>
+        
+        <form id="regForm">
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="name" class="modern-input" required>
+            </div>
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="email" class="modern-input" required>
+            </div>
+            
+            <div class="input-group" id="eventGroup">
+                <label>Select Event</label>
+                <select id="eventSelect" class="modern-input"></select>
+            </div>
+            
+            <div class="input-group" id="teamIdGroup" style="display:none;">
+                <label>Team ID</label>
+                <input type="text" id="joinTeamId" class="modern-input">
+            </div>
+            
+            <button type="submit" class="cta-btn">PROCEED</button>
+        </form>
+        <p id="regMsg" class="success-msg"></p>
+    </div>
+</main>
+<footer><div class="footer-top-bar"><div class="copyright-text">COPYRIGHT © ROBOTICS CLUB 2025</div></div></footer><script src="/js/script.js"></script><script src="/js/register.js"></script></body></html>

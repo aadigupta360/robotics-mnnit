@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Robotics Club MNNIT</title><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></head><body><div class="video-container"><video autoplay muted loop id="bg-video"><source src="https://videos.pexels.com/video-files/3129671/3129671-hd_1920_1080_30fps.mp4" type="video/mp4"></video><div class="video-overlay"></div></div>
+<nav>
+    <div class="logo">ROBOTICS CLUB <span class="highlight">MNNIT</span></div>
+    <div class="nav-right">
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></div>
+            </label>
+        </div>
+        <div class="nav-toggle-btn" onclick="toggleNav()">
+            <i class="fas fa-chevron-down" id="navArrow"></i>
+        </div>
+    </div>
+    <div class="nav-overlay" id="navOverlay">
+        <div class="nav-menu">
+            <a href="/">Home</a>
+            <a href="/projects">Projects</a>
+            <a href="/sdc">SDC</a>
+            <a href="/gallery">Gallery</a>
+            <a href="/team">Team</a>
+            <a href="/register" class="highlight-link">Register</a>
+            <a href="/login" class="highlight-link">Team Login</a>
+        </div>
+    </div>
+</nav>
+<main class="projects-section"><h2 class="section-title">PROJECTS</h2><div class="projects-grid" id="pGrid"></div></main><div id="projectModal" class="modal-overlay"><div class="modal-card"><span class="close-modal" onclick="closeModal()">×</span><div class="modal-img-container" id="modalImg"></div><div class="modal-content"><h2 id="modalTitle"></h2><p id="modalDesc"></p><div class="modal-actions" id="modalActions"></div></div></div></div><footer><div class="footer-top-bar"><div class="copyright-text">COPYRIGHT © ROBOTICS CLUB 2025</div></div></footer><script src="/js/script.js"></script><script>fetch('/api/projects').then(r=>r.json()).then(d=>document.getElementById('pGrid').innerHTML=d.map(p=>`<div class="project-card" onclick="openModal('${p.name}','${p.image}','${p.fullDesc}', '${p.youtube||''}', '${p.github||''}')"><div class="card-bg" style="background-image:url('${p.image}')"></div><div class="card-info"><h3>${p.name}</h3><p class="short-desc">${p.shortDesc}</p></div></div>`).join(''));const modal=document.getElementById('projectModal');window.openModal=(t,i,d,yt,git)=>{document.getElementById('modalTitle').innerText=t;document.getElementById('modalDesc').innerText=d;document.getElementById('modalImg').style.backgroundImage=`url('${i}')`;let btns = '';if(yt && yt !== '#') btns += `<a href="${yt}" target="_blank" class="social-btn yt"><i class="fab fa-youtube"></i> Watch Video</a>`;if(git && git !== '#') btns += `<a href="${git}" target="_blank" class="social-btn git"><i class="fab fa-github"></i> Source Code</a>`;document.getElementById('modalActions').innerHTML = btns;modal.classList.add('active');};window.closeModal=()=>{modal.classList.remove('active');};</script></body></html>
